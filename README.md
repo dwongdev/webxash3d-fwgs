@@ -104,6 +104,10 @@ Need help? Want to share your project or ideas?
 
 # TODO
 
+## Metamod and AMX Mod X support
+
+Add support for Metamod and AMX Mod X to work with many mods
+
 ## WebRTC/UDP proxy
 
 Support WebRTC/UDP proxy (webxash3d-mserver).
