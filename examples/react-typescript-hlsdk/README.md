@@ -7,7 +7,7 @@ This project integrates the Xash3D-FWGS HLSDK Portable with a React + TypeScript
 Install dependencies:
 
 ```shell
-npm install
+pnpm install
 ```
 
 Start the app:

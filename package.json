@@ -4,11 +4,6 @@
   "scripts": {
     "update-commits": "ts-node scripts/update-commits.ts"
   },
-  "workspaces": [
-    "packages/*",
-    "examples/*",
-    "docker/*"
-  ],
   "devDependencies": {
     "@types/node": "^24.6.1",
     "ts-node": "^10.9.2",

@@ -148,15 +148,11 @@ export class Net implements EmNet {
         flags: number,
         sockaddrPtr: number,
         socklenPtr: number,
-        ip?: [number, number, number, number],
-        port?: number
     ): number {
         const em = this.em!;
         const heapU8 = em.HEAPU8;
 
-        if (!ip || !port) {
-            [ip, port] = this.readSockaddrFast(sockaddrPtr);
-        }
+        const [ip, port] = this.readSockaddrFast(sockaddrPtr);
 
         // bufPtr is already a direct pointer to the buffer data
         const packetCopy = heapU8.subarray(bufPtr, bufPtr + bufLen);
@@ -176,6 +172,7 @@ export class Net implements EmNet {
     ): number {
         const em = this.em!;
         const heap32 = em.HEAP32;
+        const heapU8 = em.HEAPU8;
 
         let totalSize = 0;
         const [ip, port] = this.readSockaddrFast(sockaddrPtr);
@@ -183,22 +180,14 @@ export class Net implements EmNet {
         for (let i = 0; i < count; ++i) {
             const size = heap32[(lensPtr >> 2) + i];
             const packetPtr = heap32[(bufsPtr >> 2) + i];
+            const slice = heapU8.subarray(packetPtr, packetPtr + size);
+            this.sender.sendto({
+                data: slice,
+                port,
+                ip
+            })
 
-            const sent = this.sendto(
-                fd,
-                packetPtr,
-                size,
-                flags,
-                sockaddrPtr,
-                socklenPtr,
-                ip,
-                port
-            );
-            if (sent < 0) {
-                return -1;
-            }
-
-            totalSize += sent;
+            totalSize += slice.length;
         }
 
         return totalSize;

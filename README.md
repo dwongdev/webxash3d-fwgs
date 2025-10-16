@@ -45,7 +45,7 @@ cd webxash3d-fwgs
 ### Install Dependencies
 
 ```shell
-npm install
+pnpm install
 ```
 
 ### Game Content
