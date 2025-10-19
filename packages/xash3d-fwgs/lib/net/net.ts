@@ -34,7 +34,7 @@ export interface Socket {
 }
 
 /**
- * Emulates a simple network layer for Xash3D by implementing `sendto` and `recvfrom`
+ * Emulates a simple network layer for Xash3D by implementing network functions
  * in a way that integrates with Emscripten’s networking model.
  */
 export class Net implements EmNet {
