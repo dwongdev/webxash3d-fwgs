@@ -27,8 +27,11 @@ jobs:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org/'
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Parse tag to get package and version
         id: parse_tag
@@ -68,7 +71,7 @@ jobs:
           find . -name '*waf' -exec chmod +x {} \;
 
       - name: Build package
-        run: cd packages/${{ needs.setup.outputs.package }} && npm run build
+        run: cd packages/${{ needs.setup.outputs.package }} && pnpm run build
 
       - name: Upload built package
         uses: actions/upload-artifact@v4
@@ -94,7 +97,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish NPM package
-        run: cd package && npm publish --access public
+        run: cd package && pnpm publish --access public
 
   release:
     runs-on: ubuntu-latest
