@@ -13,7 +13,7 @@ pnpm install
 Start the app:
 
 ```shell
-npm start
+pnpm start
 ```
 
 Open http://localhost:3000 in your browser.
