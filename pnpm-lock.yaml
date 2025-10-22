@@ -27,17 +27,17 @@ importers:
         specifier: latest
         version: 0.1.1
       esbuild:
-        specifier: ^0.25.9
+        specifier: 0.25.11
         version: 0.25.11
       jszip:
-        specifier: ^3.10.1
+        specifier: 3.10.1
         version: 3.10.1
       typescript:
-        specifier: ^5.8.3
+        specifier: ^5.9.3
         version: 5.9.3
       vite:
-        specifier: ^7.0.6
-        version: 7.1.10(@types/node@24.8.1)(jiti@1.21.7)(terser@5.44.0)(yaml@2.8.1)
+        specifier: 7.1.11
+        version: 7.1.11(@types/node@24.8.1)(jiti@1.21.7)(terser@5.44.0)(yaml@2.8.1)
       xash3d-fwgs:
         specifier: latest
         version: 1.2.0
@@ -54,8 +54,8 @@ importers:
         specifier: ^19.1.6
         version: 19.2.2(@types/react@19.2.2)
       cs16-client:
-        specifier: workspace:*
-        version: link:../../packages/cs16-client
+        specifier: latest
+        version: 0.1.1
       jszip:
         specifier: 3.10.1
         version: 3.10.1
@@ -72,8 +72,8 @@ importers:
         specifier: 4.9.5
         version: 4.9.5
       xash3d-fwgs:
-        specifier: workspace:*
-        version: link:../../packages/xash3d-fwgs
+        specifier: latest
+        version: 1.2.0
     devDependencies:
       react-app-rewired:
         specifier: ^2.2.1
@@ -91,8 +91,8 @@ importers:
         specifier: ^19.1.6
         version: 19.2.2(@types/react@19.2.2)
       cs16-client:
-        specifier: workspace:*
-        version: link:../../packages/cs16-client
+        specifier: latest
+        version: 0.1.1
       jszip:
         specifier: 3.10.1
         version: 3.10.1
@@ -109,8 +109,8 @@ importers:
         specifier: 4.9.5
         version: 4.9.5
       xash3d-fwgs:
-        specifier: workspace:*
-        version: link:../../packages/xash3d-fwgs
+        specifier: latest
+        version: 1.2.0
     devDependencies:
       react-app-rewired:
         specifier: ^2.2.1
@@ -128,8 +128,8 @@ importers:
         specifier: ^19.1.6
         version: 19.2.2(@types/react@19.2.2)
       hlsdk-portable:
-        specifier: workspace:*
-        version: link:../../packages/hlsdk-portable
+        specifier: latest
+        version: 0.1.1
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -143,8 +143,8 @@ importers:
         specifier: 4.9.5
         version: 4.9.5
       xash3d-fwgs:
-        specifier: workspace:*
-        version: link:../../packages/xash3d-fwgs
+        specifier: latest
+        version: 1.2.0
     devDependencies:
       react-app-rewired:
         specifier: ^2.2.1
@@ -7504,8 +7504,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vite@7.1.10:
-    resolution: {integrity: sha512-CmuvUBzVJ/e3HGxhg6cYk88NGgTnBoOo7ogtfJJ0fefUWAxN/WDSUa50o+oVBxuIhO8FoEZW0j2eW7sfjs5EtA==}
+  vite@7.1.11:
+    resolution: {integrity: sha512-uzcxnSDVjAopEUjljkWh8EIrg6tlzrjFUfMcR1EVsRDGwf/ccef0qQPRyOrROwhrTDaApueq+ja+KLPlzR/zdg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -14175,7 +14175,7 @@ snapshots:
       proc-log: 5.0.0
       semver: 7.7.2
       tar: 7.5.1
-      tinyglobby: 0.2.12
+      tinyglobby: 0.2.15
       which: 5.0.0
     transitivePeerDependencies:
       - supports-color
@@ -16602,7 +16602,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@7.1.10(@types/node@24.8.1)(jiti@1.21.7)(terser@5.44.0)(yaml@2.8.1):
+  vite@7.1.11(@types/node@24.8.1)(jiti@1.21.7)(terser@5.44.0)(yaml@2.8.1):
     dependencies:
       esbuild: 0.25.11
       fdir: 6.5.0(picomatch@4.0.3)
