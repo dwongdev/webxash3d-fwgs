@@ -5,9 +5,9 @@
     "update-commits": "ts-node scripts/update-commits.ts"
   },
   "devDependencies": {
-    "@types/node": "^24.8.1",
-    "ts-node": "^10.9.2",
+    "@types/node": "^24.9.1",
     "lerna": "9.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
 }

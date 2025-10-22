@@ -8,6 +8,11 @@ import gl4esURL from 'xash3d-fwgs/libref_webgl2.wasm?url'
 import extrasURL from 'cs16-client/extras.pk3?url'
 import {Xash3DWebRTC} from "./webrtc";
 
+const touchControls = document.getElementById('touchControls') as HTMLInputElement
+touchControls.addEventListener('change', () => {
+    localStorage.setItem('touchControls', String(touchControls.checked))
+})
+
 let usernamePromiseResolve: (name: string) => void
 const usernamePromise = new Promise<string>(resolve => {
     usernamePromiseResolve = resolve
@@ -88,8 +93,6 @@ async function main() {
     }))
 
     x.em.FS.writeFile('/rodir/cstrike/extras.pk3', new Uint8Array(extras))
-    const isMobile = !window.matchMedia('(hover: hover)').matches
-
     x.em.FS.chdir('/rodir')
 
     document.getElementById('logo')!.style.animationName = 'pulsate-end'
@@ -100,7 +103,7 @@ async function main() {
     const username = await usernamePromise
     x.main()
     x.Cmd_ExecuteString('_vgui_menus 0')
-    if (isMobile) {
+    if (touchControls.checked) {
         x.Cmd_ExecuteString('touch_enable 1')
     }
     x.Cmd_ExecuteString(`name "${username}"`)
@@ -112,6 +115,14 @@ async function main() {
         return '';
     });
 }
+const enableTouch = localStorage.getItem('touchControls')
+if (enableTouch === null) {
+    const isMobile = !window.matchMedia('(hover: hover)').matches;
+    touchControls.checked = isMobile
+    localStorage.setItem('touchControls', String(isMobile))
+} else {
+    touchControls.checked = enableTouch === 'true'
+}
 
 const username = localStorage.getItem('username')
 if (username) {
@@ -122,7 +133,8 @@ if (username) {
     e.preventDefault()
     const username = (document.getElementById('username') as HTMLInputElement).value
     localStorage.setItem('username', username);
-    (document.getElementById('form') as HTMLFormElement).style.display = 'none'
+    (document.getElementById('form') as HTMLFormElement).style.display = 'none';
+    (document.getElementById('social') as HTMLDivElement).style.display = 'none';
     usernamePromiseResolve(username)
 })
 

@@ -1,20 +1,8 @@
 FROM debian:trixie-slim AS engine
 
 RUN dpkg --add-architecture i386
-
-RUN echo "deb http://deb.debian.org/debian testing main" > /etc/apt/sources.list.d/testing.list
-
-RUN apt update && \
-    apt install -y -t testing gcc-14 g++-14 gcc-14-multilib g++-14-multilib && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100 && \
-    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
-
-RUN apt install -y --no-install-recommends \
-    git ca-certificates build-essential \
-    gcc-multilib g++-multilib \
-    libbsd-dev:i386 libsdl2-dev:i386 libfreetype-dev:i386 \
-    libopus-dev:i386 libbz2-dev:i386 libvorbis-dev:i386 \
-    libopusfile-dev:i386 libogg-dev:i386
+RUN apt update && apt upgrade -y && apt -y --no-install-recommends install aptitude
+RUN aptitude -y --without-recommends install git ca-certificates build-essential gcc-multilib g++-multilib libbsd-dev:i386 libsdl2-dev:i386 libfreetype-dev:i386 libopus-dev:i386 libbz2-dev:i386 libvorbis-dev:i386 libopusfile-dev:i386 libogg-dev:i386
 
 ENV PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
 
@@ -25,7 +13,7 @@ RUN git clone --branch go --single-branch https://github.com/yohimik/xash3d-fwgs
 
 RUN ./waf configure -T release -d --enable-lto --enable-openmp && ./waf build
 
-FROM golang:1.24 AS go
+FROM golang:1.25.1 AS go
 
 WORKDIR /go
 COPY docker/cs-web-server/go.mod go.mod
@@ -87,19 +75,24 @@ COPY docker/cs-web-server/configs/cstrike cstrike
 
 FROM --platform=linux/amd64 node:22-alpine AS client
 
+RUN npm install -g pnpm
+
 WORKDIR /client
 
 COPY docker/cs-web-server/package.json docker/cs-web-server/package.json
 COPY package.json package.json
-COPY package-lock.json package-lock.json
-RUN npm ci
+COPY pnpm-lock.yaml pnpm-lock.yaml
+COPY pnpm-workspace.yaml pnpm-workspace.yaml
+RUN pnpm install --frozen-lockfile
 COPY docker/cs-web-server/vite.config.ts docker/cs-web-server/vite.config.ts
+COPY packages/xash3d-fwgs packages/xash3d-fwgs
+COPY packages/cs16-client packages/cs16-client
 COPY docker/cs-web-server/tsconfig.json docker/cs-web-server/tsconfig.json
 COPY docker/cs-web-server/src/client docker/cs-web-server/src/client
 
 WORKDIR /client/docker/cs-web-server
 
-RUN npm run build
+RUN pnpm run build
 
 
 FROM debian:trixie-slim AS final
