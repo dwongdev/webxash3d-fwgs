@@ -1,6 +1,6 @@
 {
   "name": "cs16-client",
-  "version": "0.1.1+commit.4d2fcf1",
+  "version": "0.1.2+commit.15278ca",
   "description": "cs16-client emscripten port",
   "homepage": "https://github.com/yohimik/webxash3d-fwgs",
   "scripts": {
