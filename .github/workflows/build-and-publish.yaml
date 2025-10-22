@@ -59,6 +59,9 @@ jobs:
         with:
           name: workspace
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Ensure dist is writable
         run: |
           rm -rf packages/${{ needs.setup.outputs.package }}/dist
@@ -71,7 +74,7 @@ jobs:
           find . -name '*waf' -exec chmod +x {} \;
 
       - name: Build package
-        run: cd packages/${{ needs.setup.outputs.package }} && npm run build
+        run: cd packages/${{ needs.setup.outputs.package }} && pnpm run build
 
       - name: Upload built package
         uses: actions/upload-artifact@v4
