@@ -39,7 +39,7 @@
         const extras = await (await fetch('https://cdn.jsdelivr.net/npm/cs16-client@latest/dist/cstrike/extras.pk3')).arrayBuffer()
 
         Xash3D({
-            arguments: ['-windowed', '-game', 'cstrike', '+_vgui_menus', '0'],
+            arguments: ['-windowed', '-game', 'cstrike', '+_vgui_menus', '0', '-ref', 'webgl2'],
             canvas: document.getElementById('canvas'),
             dynamicLibraries: [
                 "filesystem_stdio.wasm",
@@ -47,7 +47,7 @@
                 "cl_dlls/menu_emscripten_wasm32.wasm",
                 "dlls/cs_emscripten_wasm32.so",
                 "cl_dlls/client_emscripten_wasm32.wasm",
-                "/rwdir/filesystem_stdio.wasm",
+                "/rodir/filesystem_stdio.wasm",
             ],
             onRuntimeInitialized: function () {
                 Object.keys(files)
@@ -66,7 +66,7 @@
                 switch (p) {
                     case 'xash.wasm':
                         return 'https://cdn.jsdelivr.net/npm/xash3d-fwgs@latest/dist/xash.wasm'
-                    case '/rwdir/filesystem_stdio.wasm':
+                    case '/rodir/filesystem_stdio.wasm':
                     case 'filesystem_stdio.wasm':
                         return 'https://cdn.jsdelivr.net/npm/xash3d-fwgs@latest/dist/filesystem_stdio.wasm'
                     case 'libref_webgl2.wasm':
