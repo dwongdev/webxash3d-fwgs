@@ -1,6 +1,4 @@
-FROM yohimik/cs-web-server:latest AS server
-
-USER root
+FROM debian:trixie-slim AS addons
 
 RUN dpkg --add-architecture i386
 RUN apt update && apt upgrade -y && apt -y --no-install-recommends install aptitude
@@ -10,7 +8,7 @@ RUN apt install -y --no-install-recommends \
 
 ENV PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
 
-WORKDIR /xashds
+WORKDIR /xash
 
 ARG METAMOD_FILENAME="metamod.so"
 ARG METAMOD_URL="https://github.com/mittorn/metamod-p/releases/download/1/metamod.so"
@@ -21,21 +19,24 @@ ARG AMXMODX_FILENAME="amxmodx-$AMXMODX_VERSION-base-linux.tar.gz"
 ARG AMXMODX_SHA256="b9467a63aa92fc22330c06817d9059c4462abc3ecb50d39538dda21c8f27bd58"
 ARG AMXMODX_URL="https://www.amxmodx.org/amxxdrop/1.9/$AMXMODX_FILENAME"
 
-RUN mkdir -p cstrike/addons/metamod/dlls \
-    && touch cstrike/addons/metamod/plugins.ini
+RUN mkdir -p /opt/xash/xashds/cstrike/addons/metamod/dlls \
+    && touch /opt/xash/xashds/cstrike/addons/metamod/plugins.ini
 
 RUN curl -sLO "$METAMOD_URL" \
     && echo "$METAMOD_SHA256  $METAMOD_FILENAME" | sha256sum -c - \
-    && mv "$METAMOD_FILENAME" cstrike/addons/metamod/dlls/
+    && mv "$METAMOD_FILENAME" /opt/xash/xashds/cstrike/addons/metamod/dlls/
 
 RUN curl -sLO "$AMXMODX_URL" \
     && echo "$AMXMODX_SHA256  $AMXMODX_FILENAME" | sha256sum -c - \
-    && tar -C cstrike/ -zxvf "$AMXMODX_FILENAME" \
-    && echo 'linux addons/amxmodx/dlls/amxmodx_mm_i386.so' >> cstrike/addons/metamod/plugins.ini \
+    && tar -C /opt/xash/xashds/cstrike/ -zxvf "$AMXMODX_FILENAME" \
+    && echo 'linux addons/amxmodx/dlls/amxmodx_mm_i386.so' >> /opt/xash/xashds/cstrike/addons/metamod/plugins.ini \
     && rm -f "$AMXMODX_FILENAME" \
-    && patchelf --clear-execstack cstrike/addons/amxmodx/dlls/amxmodx_mm_i386.so
+    && patchelf --clear-execstack /opt/xash/xashds/cstrike/addons/amxmodx/dlls/amxmodx_mm_i386.so
 
+FROM yohimik/cs-web-server:latest AS server
+
+COPY --from=addons "/opt/xash/xashds/cstrike" cstrike
+USER root
 RUN sed -i 's/dlls\/cs\.so/addons\/metamod\/dlls\/metamod.so/g' cstrike/liblist.gam
-RUN cat cstrike/mapcycle.txt >> cstrike/addons/amxmodx/configs/maps.ini
-
 USER xashds
+RUN cat cstrike/mapcycle.txt >> cstrike/addons/amxmodx/configs/maps.ini
