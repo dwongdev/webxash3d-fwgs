@@ -21,7 +21,7 @@ in-browser gameplay and remote multiplayer support.
 
 If you want **AMX Mod X and Metamod pre-installed and ready to use**, check out the [cs-web-server-metpamx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-metpamx) variant. It includes:
 - Pre-configured Metamod-P
-- AMX Mod X 1.9.0 with all base modules
+- AMX Mod X with all base modules
 - Ready for custom plugins out of the box
 
 This base version is compatible with AMX Mod X but requires manual installation.

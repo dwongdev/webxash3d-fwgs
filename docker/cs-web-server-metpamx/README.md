@@ -19,7 +19,7 @@ Special thanks that made this project possible:
 - ✅ Web-based CS 1.6 client (HTML + TypeScript + Vite)
 - ✅ Dedicated CS 1.6 server (Go + CGO + Xash3D FWGS)
 - ✅ WebRTC support for browser-to-server networking
-- ✅ **Pre-installed Metamod-P & AMX Mod X 1.9.0**
+- ✅ **Pre-installed Metamod-P & AMX Mod X**
 - ✅ **Ready for custom plugins out of the box**
 - ✅ Dockerized & easy to deploy
 - ✅ i386 (32-bit) architecture support
@@ -30,7 +30,7 @@ Special thanks that made this project possible:
 
 This image extends the base [cs-web-server](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server) with:
 - **Metamod-P** pre-installed and configured
-- **AMX Mod X 1.9.0** pre-installed with all base modules
+- **AMX Mod X** pre-installed with all base modules
 - Modified `liblist.gam` to load Metamod automatically
 - Pre-configured plugin directories and files
 
@@ -111,7 +111,7 @@ Modify files in src/client
 
 ### AMX Mod X Plugins
 
-This image comes with AMX Mod X 1.9.0 pre-installed. To add custom plugins:
+This image comes with AMX Mod X pre-installed. To add custom plugins:
 
 **Option 1: Mount plugins directory**
 ```yaml

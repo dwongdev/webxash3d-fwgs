@@ -21,7 +21,7 @@ Special thanks that made this project possible:
 - ✅ Web-based CS 1.6 client (HTML + TypeScript + Vite)
 - ✅ Dedicated CS 1.6 server (Go + CGO + Xash3D FWGS)
 - ✅ WebRTC support for browser-to-server networking
-- ✅ **Pre-installed Metamod-P & AMX Mod X 1.9.0**
+- ✅ **Pre-installed Metamod-P & AMX Mod X**
 - ✅ **Ready for custom plugins out of the box**
 - ✅ Dockerized & easy to deploy
 - ✅ i386 (32-bit) architecture support
@@ -97,7 +97,7 @@ Variables available from [base image](https://github.com/yohimik/webxash3d-fwgs/
 
 ### AMX Mod X Plugins
 
-This image comes with AMX Mod X 1.9.0 pre-installed. To add custom plugins:
+This image comes with AMX Mod X pre-installed. To add custom plugins:
 
 **Mount plugins directory:**
 ```yaml
