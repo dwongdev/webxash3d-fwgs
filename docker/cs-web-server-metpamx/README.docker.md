@@ -8,6 +8,14 @@ Repository: [github.com/yohimik/webxash3d-fwgs/docker/cs-web-server-metpamx](htt
 
 ---
 
+## 🙏 Credits & Acknowledgements
+
+Special thanks that made this project possible:
+
+- [@ludufre](https://github.com/ludufre) initial Docker image creation and plugins support
+
+--- 
+
 ## 🧱 Features
 
 - ✅ Web-based CS 1.6 client (HTML + TypeScript + Vite)
