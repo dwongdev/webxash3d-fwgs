@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'cs-web-server@*'
+      - 'cs-web-server-metpamx@*'
 
 jobs:
   setup:

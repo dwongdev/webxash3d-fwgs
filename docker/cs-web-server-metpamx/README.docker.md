@@ -4,7 +4,7 @@ This image provides a **plug-and-play Docker image** for running a fully functio
 and dedicated server via the web with **AMX Mod X pre-installed**. Powered by **Xash3D FWGS**, **WebRTC**, and modern web tooling, this setup allows for
 in-browser gameplay and remote multiplayer support with full plugin support.
 
-Repository: [github.com/yohimik/webxash3d-fwgs/docker/cs-web-server-amx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-amx)
+Repository: [github.com/yohimik/webxash3d-fwgs/docker/cs-web-server-metpamx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-metpamx)
 
 ---
 
@@ -52,14 +52,14 @@ docker run -d \
   -e IP=<your-public-ip> \
   -e PORT=<your-port> \
   -v $(pwd)/valve.zip:/xashds/public/valve.zip \
-  yohimik/cs-web-server-amx:latest \
+  yohimik/cs-web-server-metpamx:latest \
   +map de_dust +maxplayers 14
 ```
 
 ```yaml
 services:
   xash3d:
-    image: yohimik/cs-web-server-amx:latest
+    image: yohimik/cs-web-server-metpamx:latest
     command: [ "+map de_dust", "+maxplayers 14" ]
     restart: always
     platform: linux/386
@@ -83,17 +83,9 @@ Then open `http://<your-server-ip>:27016` in your browser!
 
 ## 🌍 Environment Variables
 
-| Variable               | Description                                            | Example             |
-|------------------------|--------------------------------------------------------|---------------------|
-| `IP`                   | Public IP address for WebRTC connection                | `123.45.67.89`      |
-| `PORT`                 | UDP port for CS server (must be open)                  | `27018`             |
-| `DISABLE_X_POWERED_BY` | Set to `true` to remove the `X-Powered-By` HTTP header | `true`              |
-| `X_POWERED_BY_VALUE`   | Custom value for `X-Powered-By` header if not disabled | `CS 1.6 Web Server` |
+Variables available from [base image](https://github.com/yohimik/webxash3d-fwgs/blob/main/docker/cs-web-server/README.md#-environment-variables)
 
 ## 🛠️ Customization
-
-### Client UI/UX
-Modify files in src/client
 
 ### AMX Mod X Plugins
 
@@ -109,7 +101,7 @@ volumes:
 
 **Extend the image:**
 ```dockerfile
-FROM yohimik/cs-web-server-amx:latest
+FROM yohimik/cs-web-server-metpamx:latest
 COPY my-plugins/*.amxx /xashds/cstrike/addons/amxmodx/plugins/
 ```
 
@@ -133,7 +125,7 @@ See the [LICENSE](./LICENSE.md) file for more information.
 
 ## 📝 Changelog
 
-See [CHANGELOG.md](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-amx/CHANGELOG.md) for a full
+See [CHANGELOG.md](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-metpamx/CHANGELOG.md) for a full
 list of updates and release history.
 
 ## 🔗 Related Projects

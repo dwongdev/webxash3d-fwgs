@@ -38,7 +38,7 @@ x.quit()
 Ready-to-deploy Docker images for Counter-Strike 1.6 web servers:
 
 * [cs-web-server](docker/cs-web-server): Vanilla CS 1.6 web server with client and dedicated server
-* [cs-web-server-amx](docker/cs-web-server-amx): CS 1.6 web server with **Metamod-P & AMX Mod X 1.9.0 pre-installed**
+* [cs-web-server-metpamx](docker/cs-web-server-metpamx): CS 1.6 web server with **Metamod-P & AMX Mod X 1.9.0 pre-installed**
 
 Both support WebRTC for browser-to-server networking and are fully Dockerized for easy deployment.
 

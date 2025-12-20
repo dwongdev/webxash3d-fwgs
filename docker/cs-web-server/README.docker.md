@@ -20,7 +20,7 @@ Repository: [github.com/yohimik/webxash3d-fwgs/docker/cs-web-server](https://git
 
 ## 🎯 Looking for AMX Mod X Support?
 
-If you want **AMX Mod X and Metamod pre-installed and ready to use**, check out the [cs-web-server-amx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-amx) variant. It includes:
+If you want **AMX Mod X and Metamod pre-installed and ready to use**, check out the [cs-web-server-metpamx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-metpamx) variant. It includes:
 - Pre-configured Metamod-P
 - AMX Mod X 1.9.0 with all base modules
 - Ready for custom plugins out of the box
@@ -125,4 +125,4 @@ list of updates and release history.
 
 ## 🔗 Related Projects
 
-- [cs-web-server-amx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-amx) - Version with AMX Mod X & Metamod pre-installed
+- [cs-web-server-metpamx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-metpamx) - Version with AMX Mod X & Metamod pre-installed

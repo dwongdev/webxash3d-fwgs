@@ -30,34 +30,6 @@ If you don't need AMX Mod X or prefer a vanilla server, use the [base cs-web-ser
 
 ---
 
-## 📁 Repository Structure
-
-```plaintext
-.
-├── Dockerfile            # Unified Dockerfile for client + server
-├── src/
-│   ├── client/           # HTML + TypeScript + Vite web client
-│   └── server/           # Golang + CGO dedicated server
-└── README.md             # You're here
-```
-
-## 🔧 Technologies
-
-### 🖥️ Client (src/client)
-
-* Framework: Vite (with HTML + TypeScript)
-* NPM packages:
-    * xash3d-fwgs
-    * cs16-client
-* Uses WebRTC to connect to the dedicated server
-
-### 🎮 Server (src/server)
-
-* Language: Go (Golang) + CGO
-* Embedded: Xash3D FWGS (dedicated server)
-* Network: Pion WebRTC library
-* Serves static files for the client frontend
-
 ## 🚀 Getting Started
 
 ### 🎮 Game Content (Required)
@@ -84,21 +56,21 @@ The `valve.zip` file must contain the following two directories from your Steam 
 You must mount the file to the container path `/xashds/public/valve.zip`:
 
 ```shell
-docker build --platform linux/386 -t cs-web-server-amx .
+docker build --platform linux/386 -t cs-web-server-metpamx .
 docker run -d \
   -p 27016:27016 \
   -p <your-port>:<your-port>/udp \
   -e IP=<your-public-ip> \
   -e PORT=<your-port> \
   -v $(pwd)/valve.zip:/xashds/public/valve.zip \
-  yohimik/cs-web-server-amx:latest \
+  yohimik/cs-web-server-metpamx:latest \
   +map de_dust +maxplayers 14
 ```
 
 ```yaml
 services:
   xash3d:
-    image: yohimik/cs-web-server-amx:latest
+    image: yohimik/cs-web-server-metpamx:latest
     command: [ "+map de_dust", "+maxplayers 14" ]
     restart: always
     platform: linux/386
@@ -122,12 +94,7 @@ Then open `http://<your-server-ip>:27016` in your browser!
 
 ## 🌍 Environment Variables
 
-| Variable               | Description                                            | Example             |
-|------------------------|--------------------------------------------------------|---------------------|
-| `IP`                   | Public IP address for WebRTC connection                | `123.45.67.89`      |
-| `PORT`                 | UDP port for CS server (must be open)                  | `27018`             |
-| `DISABLE_X_POWERED_BY` | Set to `true` to remove the `X-Powered-By` HTTP header | `true`              |
-| `X_POWERED_BY_VALUE`   | Custom value for `X-Powered-By` header if not disabled | `CS 1.6 Web Server` |
+Variables available from [base image](https://github.com/yohimik/webxash3d-fwgs/blob/main/docker/cs-web-server/README.md#-environment-variables)
 
 ## 🛠️ Customization
 
@@ -153,7 +120,7 @@ volumes:
 
 **Option 3: Build custom image**
 ```dockerfile
-FROM yohimik/cs-web-server-amx:latest
+FROM yohimik/cs-web-server-metpamx:latest
 COPY my-plugins/*.amxx /xashds/cstrike/addons/amxmodx/plugins/
 COPY my-configs/*.cfg /xashds/cstrike/addons/amxmodx/configs/
 ```
@@ -182,7 +149,7 @@ See the [LICENSE](./LICENSE.md) file for more information.
 
 ## 📝 Changelog
 
-See [CHANGELOG.md](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-amx/CHANGELOG.md) for a full
+See [CHANGELOG.md](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server-metpamx/CHANGELOG.md) for a full
 list of updates and release history.
 
 ## 🔗 Related Projects
