@@ -73,6 +73,16 @@ WORKDIR /opt/xash/xashds
 COPY docker/cs-web-server/configs/valve valve
 COPY docker/cs-web-server/configs/cstrike cstrike
 
+FROM --platform=linux/amd64 node:22-alpine AS wasm
+
+RUN npm install -g pnpm
+
+WORKDIR /client
+
+COPY docker/cs-web-server/wasm/package.json package.json
+COPY docker/cs-web-server/wasm/pnpm-lock.yaml pnpm-lock.yaml
+RUN pnpm install --frozen-lockfile
+
 FROM --platform=linux/amd64 node:22-alpine AS client
 
 RUN npm install -g pnpm
@@ -116,10 +126,23 @@ ENV LD_LIBRARY_PATH=/xashds
 COPY --from=hlds /opt/xash/xashds .
 COPY --from=go /go/xash ./xash
 COPY --from=client /client/docker/cs-web-server/src/client/dist ./public
+COPY --from=wasm /client/node_modules/cs16-client/dist/cstrike/ ./public/cstrike
 COPY --from=engine /xash/build/filesystem/filesystem_stdio.so ./filesystem_stdio.so
 COPY --from=engine "/usr/lib/i386-linux-gnu/libstdc++.so.6" "./libstdc++.so.6"
 COPY --from=engine "/usr/lib/i386-linux-gnu/libgcc_s.so.1" "./libgcc_s.so.1"
 EXPOSE 27015/udp
+
+# Engine configuration
+ENV GAME_DIR="cstrike"
+ENV ENGINE_ARGS="-windowed,-game,cstrike"
+ENV ENGINE_CONSOLE="_vgui_menus 0"
+
+# Library paths
+ENV CLIENT_WASM_PATH="cstrike/cl_dlls/client_emscripten_wasm32.wasm"
+ENV SERVER_WASM_PATH="cstrike/dlls/cs_emscripten_wasm32.wasm"
+ENV MENU_WASM_PATH="cstrike/cl_dlls/menu_emscripten_wasm32.wasm"
+ENV EXTRAS_PATH="cstrike/extras.pk3"
+ENV SERVER_LIB="dlls/cs_emscripten_wasm32.so"
 
 # Start server
 ENTRYPOINT ["./xash", "+ip", "0.0.0.0", "-port", "27015", "-game", "cstrike"]

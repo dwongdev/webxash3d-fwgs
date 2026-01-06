@@ -1,0 +1,22 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      cs16-client:
+        specifier: latest
+        version: 0.1.2
+
+packages:
+
+  cs16-client@0.1.2:
+    resolution: {integrity: sha512-0u4YL72tBOqowMpPuCg16TwJBk6vLRmWZiKDVejTB32gb6gmyRicnzQmzUi4r9sUctuzJmvwlYyEEgYFsOizjw==}
+
+snapshots:
+
+  cs16-client@0.1.2: {}

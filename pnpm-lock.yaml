@@ -23,9 +23,6 @@ importers:
 
   docker/cs-web-server:
     devDependencies:
-      cs16-client:
-        specifier: latest
-        version: 0.1.2
       esbuild:
         specifier: 0.25.11
         version: 0.25.11
