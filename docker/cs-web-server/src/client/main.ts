@@ -1,11 +1,6 @@
 import {loadAsync} from 'jszip'
-import filesystemURL from 'xash3d-fwgs/filesystem_stdio.wasm?url'
 import xashURL from 'xash3d-fwgs/xash.wasm?url'
-import menuURL from 'cs16-client/cl_dll/menu_emscripten_wasm32.wasm?url'
-import clientURL from 'cs16-client/cl_dlls/client_emscripten_wasm32.wasm?url'
-import serverURL from 'cs16-client/dlls/cs_emscripten_wasm32.so?url'
 import gl4esURL from 'xash3d-fwgs/libref_webgl2.wasm?url'
-import extrasURL from 'cs16-client/extras.pk3?url'
 import {Xash3DWebRTC} from "./webrtc";
 
 const touchControls = document.getElementById('touchControls') as HTMLInputElement
@@ -50,24 +45,38 @@ async function fetchWithProgress(url: string) {
 }
 
 async function main() {
+    // Load dynamic configuration from server (environment variables)
+    const config = await fetch("/config").then(res => res.json()) as Awaited<{
+        arguments: string[];
+        console: string[];
+        game_dir: string;
+        libraries: {
+            client: string;
+            server: string;
+            extras: string;
+            menu: string;
+            filesystem: string;
+        };
+        dynamic_libraries: string[];
+        files_map: Record<string, string>;
+    }>
+
+    // Use URLs directly from server config (no imports needed)
     const x = new Xash3DWebRTC({
         canvas: document.getElementById('canvas') as HTMLCanvasElement,
-        arguments: ['-windowed', '-game', 'cstrike'],
+        arguments: config.arguments || ['-windowed'],
         libraries: {
-            filesystem: filesystemURL,
+            filesystem: config.libraries.filesystem,
             xash: xashURL,
-            menu: menuURL,
-            server: serverURL,
-            client: clientURL,
+            menu: config.libraries.menu,
+            server: config.libraries.server,
+            client: config.libraries.client,
             render: {
                 gl4es: gl4esURL,
             }
         },
-        dynamicLibraries: ['dlls/cs_emscripten_wasm32.so', '/rwdir/filesystem_stdio.wasm'],
-        filesMap: {
-            'dlls/cs_emscripten_wasm32.so': serverURL,
-            '/rwdir/filesystem_stdio.wasm': filesystemURL,
-        },
+        dynamicLibraries: config.dynamic_libraries,
+        filesMap: config.files_map,
     });
 
     const [zip, extras] = await Promise.all([
@@ -76,7 +85,7 @@ async function main() {
             return await loadAsync(res);
         })(),
         (async () => {
-            const res = await fetch(extrasURL)
+            const res = await fetch(config.libraries.extras)
             return await res.arrayBuffer();
         })(),
         x.init(),
@@ -92,7 +101,7 @@ async function main() {
         x.em.FS.writeFile(path, await file.async("uint8array"));
     }))
 
-    x.em.FS.writeFile('/rodir/cstrike/extras.pk3', new Uint8Array(extras))
+    x.em.FS.writeFile(`/rodir/${config.game_dir}/extras.pk3`, new Uint8Array(extras))
     x.em.FS.chdir('/rodir')
 
     document.getElementById('logo')!.style.animationName = 'pulsate-end'
@@ -102,11 +111,18 @@ async function main() {
 
     const username = await usernamePromise
     x.main()
-    x.Cmd_ExecuteString('_vgui_menus 0')
     if (touchControls.checked) {
         x.Cmd_ExecuteString('touch_enable 1')
     }
     x.Cmd_ExecuteString(`name "${username}"`)
+    
+    // Execute custom server commands
+    if (config.console && Array.isArray(config.console)) {
+        config.console.forEach((cmd: string) => {
+            x.Cmd_ExecuteString(cmd)
+        })
+    }
+    
     x.Cmd_ExecuteString('connect 127.0.0.1:8080')
 
     window.addEventListener('beforeunload', (event) => {

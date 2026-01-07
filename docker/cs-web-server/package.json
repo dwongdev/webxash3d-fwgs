@@ -10,7 +10,6 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "cs16-client": "latest",
     "esbuild": "0.25.11",
     "jszip": "3.10.1",
     "typescript": "^5.9.3",

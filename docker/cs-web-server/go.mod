@@ -4,6 +4,7 @@ go 1.25.1
 
 require (
 	github.com/gorilla/websocket v1.5.3
+	github.com/jinzhu/configor v1.2.2
 	github.com/pion/ice/v4 v4.0.10
 	github.com/pion/interceptor v0.1.41
 	github.com/pion/logging v0.2.4
@@ -14,6 +15,7 @@ require (
 )
 
 require (
+	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/pion/datachannel v1.5.10 // indirect
 	github.com/pion/dtls/v3 v3.0.7 // indirect
@@ -29,4 +31,5 @@ require (
 	golang.org/x/crypto v0.43.0 // indirect
 	golang.org/x/net v0.46.0 // indirect
 	golang.org/x/sys v0.37.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

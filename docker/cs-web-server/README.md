@@ -108,6 +108,7 @@ services:
     ports:
       - "27016:27016"
       - "<your-port>:<your-port>"
+      - "<your-port>:<your-port>/udp"
 
 ```
 
@@ -120,12 +121,34 @@ Then open `http://<your-server-ip>:27016` in your browser!
 
 ## 🌍 Environment Variables
 
+### Server Configuration
+
 | Variable               | Description                                            | Example             |
 |------------------------|--------------------------------------------------------|---------------------|
 | `IP`                   | Public IP address for WebRTC connection                | `123.45.67.89`      |
 | `PORT`                 | UDP port for CS server (must be open)                  | `27018`             |
 | `DISABLE_X_POWERED_BY` | Set to `true` to remove the `X-Powered-By` HTTP header | `true`              |
 | `X_POWERED_BY_VALUE`   | Custom value for `X-Powered-By` header if not disabled | `CS 1.6 Web Server` |
+
+### Engine Configuration
+
+| Variable            | Description                                             | Default                                         |
+|---------------------|---------------------------------------------------------|-------------------------------------------------|
+| `GAME_DIR`          | Game directory name                                     | `cstrike`                                       |
+| `ENGINE_ARGS`       | Comma-separated engine arguments                        | `-windowed,-game,cstrike`                       |
+| `ENGINE_CONSOLE`    | Comma-separated console commands to execute on startup  | `_vgui_menus 0`                                 |
+
+### Library Paths
+
+| Variable               | Description                                                                          | Default                                                                                                                  |
+|------------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `CLIENT_WASM_PATH`     | Path to client WASM library                                                          | `cstrike/cl_dlls/client_emscripten_wasm32.wasm`                                                                          |
+| `SERVER_WASM_PATH`     | Path to server WASM library                                                          | `cstrike/dlls/cs_emscripten_wasm32.wasm`                                                                                 |
+| `MENU_WASM_PATH`       | Path to menu WASM library                                                            | `cstrike/cl_dlls/menu_emscripten_wasm32.wasm`                                                                            |
+| `EXTRAS_PATH`          | Path to extras package                                                               | `cstrike/extras.pk3`                                                                                                     |
+| `FILESYSTEM_WASM_PATH` | Path to filesystem WASM library                                                      | `filesystem_stdio.wasm`                                                                                                  |
+| `DYNAMIC_LIBRARIES`    | Comma-separated list of libraries to load dynamically                                | `dlls/cs_emscripten_wasm32.so,/rwdir/filesystem_stdio.wasm`                                                              |
+| `FILES_MAP`            | Comma-separated mapping of virtual paths to actual files (format: `from:to,from:to`) | `dlls/cs_emscripten_wasm32.so:cstrike/dlls/cs_emscripten_wasm32.wasm,/rwdir/filesystem_stdio.wasm:filesystem_stdio.wasm` |
 
 ## 🛠️ Customization
 
