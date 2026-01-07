@@ -1,5 +1,4 @@
 import {loadAsync} from 'jszip'
-import filesystemURL from 'xash3d-fwgs/filesystem_stdio.wasm?url'
 import xashURL from 'xash3d-fwgs/xash.wasm?url'
 import gl4esURL from 'xash3d-fwgs/libref_webgl2.wasm?url'
 import {Xash3DWebRTC} from "./webrtc";
@@ -56,8 +55,10 @@ async function main() {
             server: string;
             extras: string;
             menu: string;
+            filesystem: string;
         };
-        server_lib: string;
+        dynamic_libraries: string[];
+        files_map: Record<string, string>;
     }>
 
     // Use URLs directly from server config (no imports needed)
@@ -65,7 +66,7 @@ async function main() {
         canvas: document.getElementById('canvas') as HTMLCanvasElement,
         arguments: config.arguments || ['-windowed'],
         libraries: {
-            filesystem: filesystemURL,
+            filesystem: config.libraries.filesystem,
             xash: xashURL,
             menu: config.libraries.menu,
             server: config.libraries.server,
@@ -74,11 +75,8 @@ async function main() {
                 gl4es: gl4esURL,
             }
         },
-        dynamicLibraries: [config.server_lib, '/rwdir/filesystem_stdio.wasm'],
-        filesMap: {
-            [config.server_lib]: config.libraries.server,
-            '/rwdir/filesystem_stdio.wasm': filesystemURL,
-        },
+        dynamicLibraries: config.dynamic_libraries,
+        filesMap: config.files_map,
     });
 
     const [zip, extras] = await Promise.all([

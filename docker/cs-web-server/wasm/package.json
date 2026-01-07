@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "cs16-client": "latest"
+    "cs16-client": "latest",
+    "xash3d-fwgs": "latest"
   }
 }

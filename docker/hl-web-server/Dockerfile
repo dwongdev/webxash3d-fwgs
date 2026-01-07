@@ -29,7 +29,8 @@ ENV CLIENT_WASM_PATH="valve/cl_dlls/client_emscripten_wasm32.wasm"
 ENV SERVER_WASM_PATH="valve/dlls/hl_emscripten_wasm32.wasm"
 ENV MENU_WASM_PATH="valve/libmenu.wasm"
 ENV EXTRAS_PATH="valve/extras.pk3"
-ENV SERVER_LIB="dlls/hl_emscripten_wasm32.so"
+ENV DYNAMIC_LIBRARIES="dlls/hl_emscripten_wasm32.so"
+ENV FILES_MAP="dlls/hl_emscripten_wasm32.so:valve/dlls/hl_emscripten_wasm32.wasm"
 
 # Start server
 ENTRYPOINT ["./xash", "+ip", "0.0.0.0", "-port", "27015"]

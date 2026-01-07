@@ -140,13 +140,15 @@ Then open `http://<your-server-ip>:27016` in your browser!
 
 ### Library Paths
 
-| Variable            | Description                                             | Default                                         |
-|---------------------|---------------------------------------------------------|-------------------------------------------------|
-| `CLIENT_WASM_PATH`  | Path to client WASM library                             | `cstrike/cl_dlls/client_emscripten_wasm32.wasm` |
-| `SERVER_WASM_PATH`  | Path to server WASM library                             | `cstrike/dlls/cs_emscripten_wasm32.wasm`        |
-| `MENU_WASM_PATH`    | Path to menu WASM library                               | `cstrike/cl_dlls/menu_emscripten_wasm32.wasm`   |
-| `EXTRAS_PATH`       | Path to extras package                                  | `cstrike/extras.pk3`                            |
-| `SERVER_LIB`        | Server library to load                                  | `dlls/cs_emscripten_wasm32.so`                  |
+| Variable               | Description                                                                          | Default                                                                                                                  |
+|------------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `CLIENT_WASM_PATH`     | Path to client WASM library                                                          | `cstrike/cl_dlls/client_emscripten_wasm32.wasm`                                                                          |
+| `SERVER_WASM_PATH`     | Path to server WASM library                                                          | `cstrike/dlls/cs_emscripten_wasm32.wasm`                                                                                 |
+| `MENU_WASM_PATH`       | Path to menu WASM library                                                            | `cstrike/cl_dlls/menu_emscripten_wasm32.wasm`                                                                            |
+| `EXTRAS_PATH`          | Path to extras package                                                               | `cstrike/extras.pk3`                                                                                                     |
+| `FILESYSTEM_WASM_PATH` | Path to filesystem WASM library                                                      | `filesystem_stdio.wasm`                                                                                                  |
+| `DYNAMIC_LIBRARIES`    | Comma-separated list of libraries to load dynamically                                | `dlls/cs_emscripten_wasm32.so,/rwdir/filesystem_stdio.wasm`                                                              |
+| `FILES_MAP`            | Comma-separated mapping of virtual paths to actual files (format: `from:to,from:to`) | `dlls/cs_emscripten_wasm32.so:cstrike/dlls/cs_emscripten_wasm32.wasm,/rwdir/filesystem_stdio.wasm:filesystem_stdio.wasm` |
 
 ## 🛠️ Customization
 

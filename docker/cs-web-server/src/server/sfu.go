@@ -507,21 +507,24 @@ type Config struct {
 		GameDir   string `env:"GAME_DIR" required:"true"`
 	}
 	Libraries struct {
-		Client string `env:"CLIENT_WASM_PATH" required:"true"`
-		Server string `env:"SERVER_WASM_PATH" required:"true"`
-		Menu   string `env:"MENU_WASM_PATH" required:"true"`
-		Extras string `env:"EXTRAS_PATH" required:"true"`
+		Client           string `env:"CLIENT_WASM_PATH" required:"true"`
+		Server           string `env:"SERVER_WASM_PATH" required:"true"`
+		Menu             string `env:"MENU_WASM_PATH" required:"true"`
+		Extras           string `env:"EXTRAS_PATH" required:"true"`
+		Filesystem       string `env:"FILESYSTEM_WASM_PATH" required:"true"`
+		DynamicLibraries string `env:"DYNAMIC_LIBRARIES" required:"true"`
+		FilesMap         string `env:"FILES_MAP" required:"true"`
 	}
-	ServerLib string `env:"SERVER_LIB" required:"true"`
 }
 
 // EngineConfig holds the configuration for the Xash3D engine (JSON response)
 type EngineConfig struct {
-	Arguments []string          `json:"arguments"`
-	Console   []string          `json:"console"`
-	GameDir   string            `json:"game_dir"`
-	Libraries map[string]string `json:"libraries"`
-	ServerLib string            `json:"server_lib"`
+	Arguments        []string          `json:"arguments"`
+	Console          []string          `json:"console"`
+	GameDir          string            `json:"game_dir"`
+	Libraries        map[string]string `json:"libraries"`
+	DynamicLibraries []string          `json:"dynamic_libraries"`
+	FilesMap         map[string]string `json:"files_map"`
 }
 
 var (
@@ -545,6 +548,22 @@ func sliceArgs(value string) []string {
 	for _, part := range parts {
 		if trimmed := strings.TrimSpace(part); trimmed != "" {
 			result = append(result, trimmed)
+		}
+	}
+	return result
+}
+
+// parseFilesMap converts "from:to,from:to" format into map[string]string
+func parseFilesMap(value string) map[string]string {
+	result := make(map[string]string)
+	if value == "" {
+		return result
+	}
+	pairs := strings.Split(value, ",")
+	for _, pair := range pairs {
+		parts := strings.SplitN(strings.TrimSpace(pair), ":", 2)
+		if len(parts) == 2 {
+			result[strings.TrimSpace(parts[0])] = strings.TrimSpace(parts[1])
 		}
 	}
 	return result
@@ -579,12 +598,14 @@ func init() {
 		Console:   sliceArgs(appConfig.Engine.Console),
 		GameDir:   appConfig.Engine.GameDir,
 		Libraries: map[string]string{
-			"client": appConfig.Libraries.Client,
-			"server": appConfig.Libraries.Server,
-			"extras": appConfig.Libraries.Extras,
-			"menu":   appConfig.Libraries.Menu,
+			"client":     appConfig.Libraries.Client,
+			"server":     appConfig.Libraries.Server,
+			"extras":     appConfig.Libraries.Extras,
+			"menu":       appConfig.Libraries.Menu,
+			"filesystem": appConfig.Libraries.Filesystem,
 		},
-		ServerLib: appConfig.ServerLib,
+		DynamicLibraries: sliceArgs(appConfig.Libraries.DynamicLibraries),
+		FilesMap:         parseFilesMap(appConfig.Libraries.FilesMap),
 	}
 
 	var err error

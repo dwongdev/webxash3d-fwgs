@@ -127,6 +127,7 @@ COPY --from=hlds /opt/xash/xashds .
 COPY --from=go /go/xash ./xash
 COPY --from=client /client/docker/cs-web-server/src/client/dist ./public
 COPY --from=wasm /client/node_modules/cs16-client/dist/cstrike/ ./public/cstrike
+COPY --from=wasm /client/node_modules/xash3d-fwgs/dist/filesystem_stdio.wasm ./public/filesystem_stdio.wasm
 COPY --from=engine /xash/build/filesystem/filesystem_stdio.so ./filesystem_stdio.so
 COPY --from=engine "/usr/lib/i386-linux-gnu/libstdc++.so.6" "./libstdc++.so.6"
 COPY --from=engine "/usr/lib/i386-linux-gnu/libgcc_s.so.1" "./libgcc_s.so.1"
@@ -142,7 +143,9 @@ ENV CLIENT_WASM_PATH="cstrike/cl_dlls/client_emscripten_wasm32.wasm"
 ENV SERVER_WASM_PATH="cstrike/dlls/cs_emscripten_wasm32.wasm"
 ENV MENU_WASM_PATH="cstrike/cl_dlls/menu_emscripten_wasm32.wasm"
 ENV EXTRAS_PATH="cstrike/extras.pk3"
-ENV SERVER_LIB="dlls/cs_emscripten_wasm32.so"
+ENV FILESYSTEM_WASM_PATH="filesystem_stdio.wasm"
+ENV DYNAMIC_LIBRARIES="dlls/cs_emscripten_wasm32.so,/rwdir/filesystem_stdio.wasm"
+ENV FILES_MAP="dlls/cs_emscripten_wasm32.so:cstrike/dlls/cs_emscripten_wasm32.wasm,/rwdir/filesystem_stdio.wasm:filesystem_stdio.wasm"
 
 # Start server
 ENTRYPOINT ["./xash", "+ip", "0.0.0.0", "-port", "27015", "-game", "cstrike"]
