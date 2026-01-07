@@ -18,17 +18,6 @@ Repository: [github.com/yohimik/webxash3d-fwgs/docker/hl-web-server](https://git
 
 ---
 
-## 🎯 Looking for AMX Mod X Support?
-
-If you want **AMX Mod X and Metamod pre-installed and ready to use**, check out the [hl-web-server-metpamx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/hl-web-server-metpamx) variant. It includes:
-- Pre-configured Metamod-P
-- AMX Mod X with all base modules
-- Ready for custom plugins out of the box
-
-This base version is compatible with AMX Mod X but requires manual installation.
-
----
-
 ## 🚀 Getting Started
 
 ### 🎮 Game Content (Required)
@@ -101,10 +90,10 @@ The default values for Half-Life are pre-configured, but you can customize them 
 
 * Client UI/UX: Modify files in src/client
 
-To include custom plugins:
+To include custom content:
 
 * Mount a volume to `/xashds` inside the container
-* Or copy plugin files into the Docker build context
+* Or copy files into the Docker build context
 
 ## 🌐 Discord Community
 
@@ -123,4 +112,4 @@ list of updates and release history.
 
 ## 🔗 Related Projects
 
-- [hl-web-server-metpamx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/hl-web-server-metpamx) - Version with AMX Mod X & Metamod pre-installed
+- [cs-web-server](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server) - Counter-Strike 1.6 Web Server
