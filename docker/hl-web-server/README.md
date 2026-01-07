@@ -121,12 +121,9 @@ Then open `http://<your-server-ip>:27016` in your browser!
 
 ## 🌍 Environment Variables
 
-| Variable               | Description                                            | Example         |
-|------------------------|--------------------------------------------------------|-----------------|
-| `IP`                   | Public IP address for WebRTC connection                | `123.45.67.89`  |
-| `PORT`                 | UDP port for HL server (must be open)                  | `27018`         |
-| `DISABLE_X_POWERED_BY` | Set to `true` to remove the `X-Powered-By` HTTP header | `true`          |
-| `X_POWERED_BY_VALUE`   | Custom value for `X-Powered-By` header if not disabled | `HL Web Server` |
+This image uses the same configuration system as the [CS Web Server](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server#-environment-variables).
+
+The default values for Half-Life are pre-configured, but you can customize them using the same environment variables documented in the CS Web Server README.
 
 ## 🛠️ Customization
 
