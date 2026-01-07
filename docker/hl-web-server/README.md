@@ -17,17 +17,6 @@ in-browser gameplay and remote multiplayer support.
 
 ---
 
-## 📁 Repository Structure
-
-```plaintext
-.
-├── Dockerfile            # Unified Dockerfile for client + server
-├── src/
-│   ├── client/           # HTML + TypeScript + Vite web client
-│   └── server/           # Golang + CGO dedicated server
-└── README.md             # You're here
-```
-
 ## 🔧 Technologies
 
 ### 🖥️ Client (src/client)
