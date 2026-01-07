@@ -26,6 +26,13 @@ x.Cmd_ExecuteString('kill')
 x.quit()
 ```
 
+### Credits & Acknowledgements
+
+Special thanks to the people who made this project possible:
+
+- [@ololoken](https://github.com/ololoken) — graphics, WebGL2, and resolving many issues
+- [@ludufre](https://github.com/ludufre) — Metamod and AMX Mod X support, and Docker images
+
 ### Included Packages
 
 * [xash3d-fwgs](packages/xash3d-fwgs): Core engine build for WebAssembly.
@@ -39,8 +46,9 @@ Ready-to-deploy Docker images for Counter-Strike 1.6 web servers:
 
 * [cs-web-server](docker/cs-web-server): Vanilla CS 1.6 web server with client and dedicated server
 * [cs-web-server-metpamx](docker/cs-web-server-metpamx): CS 1.6 web server with **Metamod-P & AMX Mod X pre-installed**
+* [hl-web-server](docker/hl-web-server): Vanilla HLDM web server with client and dedicated server
 
-Both support WebRTC for browser-to-server networking and are fully Dockerized for easy deployment.
+All servers support browser-to-server networking and are fully Dockerized for easy deployment.
 
 ## Getting Started 
 
