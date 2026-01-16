@@ -41,6 +41,7 @@ async function main() {
         return {
             Module,
             FS,
+            SOCKFS,
             HEAPU32,
             HEAP32,
             HEAP16,

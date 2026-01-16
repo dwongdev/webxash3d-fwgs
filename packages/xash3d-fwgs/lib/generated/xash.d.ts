@@ -8,6 +8,14 @@ export type FS = {
     syncfs(cb: () => void): void
 }
 
+declare type SOCKFS = {
+    createSocket(
+        family: number,
+        type: number,
+        protocol: number
+    ): any;
+};
+
 export type ModuleCallbacks = {
     gameReady?: () => void
     syncFS?: (data: {path: string, op: string}) => void
@@ -37,7 +45,8 @@ export type Sockaddr = { family: number; addr: string; port: number }
 
 export type Em = {
     Module: Module
-    FS: FS
+    FS: FS,
+    SOCKFS: SOCKFS,
     start: () => void
     HEAPU32: Int8Array
     HEAP32: Int8Array
