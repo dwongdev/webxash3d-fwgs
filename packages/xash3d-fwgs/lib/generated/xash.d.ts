@@ -8,12 +8,19 @@ export type FS = {
     syncfs(cb: () => void): void
 }
 
+declare type SOCK = {
+    family: number,
+    type: number,
+    protocol: number,
+    [key: string]: unknown
+};
+
 declare type SOCKFS = {
     createSocket(
         family: number,
         type: number,
         protocol: number
-    ): any;
+    ): SOCK;
 };
 
 declare type DNS = {
