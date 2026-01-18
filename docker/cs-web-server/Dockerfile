@@ -8,7 +8,7 @@ ENV PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
 
 WORKDIR /xash
 
-RUN git clone --branch go --single-branch https://github.com/yohimik/xash3d-fwgs . \
+RUN git clone --branch merged --single-branch https://github.com/yohimik/xash3d-fwgs . \
     && git submodule update --init --recursive
 
 RUN ./waf configure -T release -d --enable-lto --enable-openmp && ./waf build
@@ -28,6 +28,7 @@ COPY --from=engine /xash/build/engine/libxash.a ../github.com/yohimik/goxash3d-f
 COPY --from=engine /xash/build/public/libbuild_vcs.a ../github.com/yohimik/goxash3d-fwgs/pkg/libbuild_vcs.a
 COPY --from=engine /xash/build/public/libpublic.a ../github.com/yohimik/goxash3d-fwgs/pkg/libpublic.a
 COPY --from=engine /xash/build/3rdparty/libbacktrace/libbacktrace.a ../github.com/yohimik/goxash3d-fwgs/pkg/libbacktrace.a
+COPY --from=engine /xash/build/3rdparty/library_suffix/liblibrary_suffix.a ../github.com/yohimik/goxash3d-fwgs/pkg/liblibrary_suffix.a
 
 ENV GOARCH=386
 ENV CC="gcc -m32 -D__i386__"
@@ -144,8 +145,8 @@ ENV SERVER_WASM_PATH="cstrike/dlls/cs_emscripten_wasm32.wasm"
 ENV MENU_WASM_PATH="cstrike/cl_dlls/menu_emscripten_wasm32.wasm"
 ENV EXTRAS_PATH="cstrike/extras.pk3"
 ENV FILESYSTEM_WASM_PATH="filesystem_stdio.wasm"
-ENV DYNAMIC_LIBRARIES="dlls/cs_emscripten_wasm32.so,/rwdir/filesystem_stdio.wasm"
-ENV FILES_MAP="dlls/cs_emscripten_wasm32.so:cstrike/dlls/cs_emscripten_wasm32.wasm,/rwdir/filesystem_stdio.wasm:filesystem_stdio.wasm"
+ENV DYNAMIC_LIBRARIES="dlls/cs_emscripten_wasm32.wasm,/rodir/filesystem_stdio.wasm"
+ENV FILES_MAP="dlls/cs_emscripten_wasm32.wasm:cstrike/dlls/cs_emscripten_wasm32.wasm,/rodir/filesystem_stdio.wasm:filesystem_stdio.wasm"
 
 # Start server
 ENTRYPOINT ["./xash", "+ip", "0.0.0.0", "-port", "27015", "-game", "cstrike"]
