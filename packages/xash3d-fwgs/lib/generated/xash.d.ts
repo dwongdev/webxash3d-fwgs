@@ -8,6 +8,31 @@ export type FS = {
     syncfs(cb: () => void): void
 }
 
+declare type SOCK = {
+    family: number,
+    type: number,
+    protocol: number,
+    [key: string]: unknown
+};
+
+declare type SOCKFS = {
+    createSocket(
+        family: number,
+        type: number,
+        protocol: number
+    ): SOCK;
+};
+
+declare type DNS = {
+  address_map: {
+    id: number;
+    addrs: Record<string, string>;
+    names: Record<string, string>;
+  };
+  lookup_name(name: string): string;
+  lookup_addr(addr: string): string | null;
+};
+
 export type ModuleCallbacks = {
     gameReady?: () => void
     syncFS?: (data: {path: string, op: string}) => void
@@ -37,7 +62,9 @@ export type Sockaddr = { family: number; addr: string; port: number }
 
 export type Em = {
     Module: Module
-    FS: FS
+    FS: FS,
+    SOCKFS: SOCKFS,
+    DNS: DNS,
     start: () => void
     HEAPU32: Int8Array
     HEAP32: Int8Array

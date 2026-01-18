@@ -1,4 +1,4 @@
-import {promises as fs, existsSync} from 'fs';
+import {promises as fs} from 'fs';
 
 class CompileFile {
     private data: string
@@ -41,6 +41,8 @@ async function main() {
         return {
             Module,
             FS,
+            SOCKFS,
+            DNS,
             HEAPU32,
             HEAP32,
             HEAP16,
