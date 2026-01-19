@@ -37,7 +37,7 @@ importers:
         version: 7.1.11(@types/node@24.9.1)(jiti@1.21.7)(terser@5.44.0)(yaml@2.8.1)
       xash3d-fwgs:
         specifier: latest
-        version: 1.2.1
+        version: 1.2.2
 
   examples/react-typescript-cs16:
     dependencies:
@@ -70,7 +70,7 @@ importers:
         version: 4.9.5
       xash3d-fwgs:
         specifier: latest
-        version: 1.2.1
+        version: 1.2.2
     devDependencies:
       react-app-rewired:
         specifier: ^2.2.1
@@ -107,7 +107,7 @@ importers:
         version: 4.9.5
       xash3d-fwgs:
         specifier: latest
-        version: 1.2.1
+        version: 1.2.2
     devDependencies:
       react-app-rewired:
         specifier: ^2.2.1
@@ -141,7 +141,7 @@ importers:
         version: 4.9.5
       xash3d-fwgs:
         specifier: latest
-        version: 1.2.1
+        version: 1.2.2
     devDependencies:
       react-app-rewired:
         specifier: ^2.2.1
@@ -178,7 +178,7 @@ importers:
         version: 4.9.5
       xash3d-fwgs:
         specifier: latest
-        version: 1.2.1
+        version: 1.2.2
     devDependencies:
       react-app-rewired:
         specifier: ^2.2.1
@@ -7820,8 +7820,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  xash3d-fwgs@1.2.1:
-    resolution: {integrity: sha512-2QMi89UkQ7bvYs0rB6h1mHSYY63TZYsstwx8L3lMkVLLJxL0d/peZYyb6gbb4+BRRrYEzGMLNsIshsXCw3HnLw==}
+  xash3d-fwgs@1.2.2:
+    resolution: {integrity: sha512-N2w5uSs3OXDGuvgryuKO42LbCQUOveYXDUr9NqmbRnjxpEjVKzhHC+4sTJe6zUTPtiIZSCfd+rHpEa92Da4Vwg==}
 
   xml-name-validator@3.0.0:
     resolution: {integrity: sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw==}
@@ -17069,7 +17069,7 @@ snapshots:
 
   ws@8.18.3: {}
 
-  xash3d-fwgs@1.2.1: {}
+  xash3d-fwgs@1.2.2: {}
 
   xml-name-validator@3.0.0: {}
 

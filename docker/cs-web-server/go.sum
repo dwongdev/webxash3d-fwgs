@@ -66,8 +66,8 @@ github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOf
 github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/wlynxg/anet v0.0.5 h1:J3VJGi1gvo0JwZ/P1/Yc/8p63SoW98B5dHkYDmpgvvU=
 github.com/wlynxg/anet v0.0.5/go.mod h1:eay5PRQr7fIVAMbTbchTnO9gG65Hg/uYGdc7mguHxoA=
-github.com/yohimik/goxash3d-fwgs v0.0.0-20260118185728-fe8a529e236c h1:VDB3anYaQVcG7xEp1GjKlWHXxszNuC7hR1qmSEBntSk=
-github.com/yohimik/goxash3d-fwgs v0.0.0-20260118185728-fe8a529e236c/go.mod h1:h9jn+OlmY9RCBqr/j+XsBqfQDXtJX3wyWjHZvvDFHLM=
+github.com/yohimik/goxash3d-fwgs v0.0.0-20260119181527-dd563e429ad3 h1:K+JBSYWSa0wmPVfBB016ilRLQhcGzxf5OU7OA0Z4Nx4=
+github.com/yohimik/goxash3d-fwgs v0.0.0-20260119181527-dd563e429ad3/go.mod h1:h9jn+OlmY9RCBqr/j+XsBqfQDXtJX3wyWjHZvvDFHLM=
 golang.org/x/crypto v0.33.0 h1:IOBPskki6Lysi0lo9qQvbxiQ+FvsCC/YWOecCHAixus=
 golang.org/x/crypto v0.33.0/go.mod h1:bVdXmD7IV/4GdElGPozy6U7lWdRXA4qyRVGJV57uQ5M=
 golang.org/x/crypto v0.40.0 h1:r4x+VvoG5Fm+eJcxMaY8CQM7Lb0l1lsmjGBQ6s8BfKM=

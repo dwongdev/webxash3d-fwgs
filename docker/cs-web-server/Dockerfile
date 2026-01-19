@@ -11,7 +11,7 @@ WORKDIR /xash
 RUN git clone --branch merged --single-branch https://github.com/yohimik/xash3d-fwgs . \
     && git submodule update --init --recursive
 
-RUN ./waf configure -T release -d --enable-lto --enable-openmp && ./waf build
+RUN ./waf configure -T release -d --enable-openmp && ./waf build
 
 FROM golang:1.25.1 AS go
 
@@ -32,7 +32,7 @@ COPY --from=engine /xash/build/3rdparty/library_suffix/liblibrary_suffix.a ../gi
 
 ENV GOARCH=386
 ENV CC="gcc -m32 -D__i386__"
-ENV CGO_CFLAGS="-fopenmp -m32"
+ENV CGO_CFLAGS="-fopenmp -m32 -fno-ipa-cp"
 ENV CGO_LDFLAGS="-fopenmp -m32"
 RUN go build -o ./xash ./src/server
 
