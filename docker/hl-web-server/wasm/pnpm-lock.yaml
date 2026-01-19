@@ -13,18 +13,18 @@ importers:
         version: 0.1.2
       xash3d-fwgs:
         specifier: latest
-        version: 1.2.1
+        version: 1.2.2
 
 packages:
 
   hlsdk-portable@0.1.2:
     resolution: {integrity: sha512-UqHnJrdmNPdjHOULbpNFF/kL3bazbWzpKdv8o349FHG5ztvdl+YTg6qbuhRMDOnPt/4KmIRfCDQnt9cNCafTUQ==}
 
-  xash3d-fwgs@1.2.1:
-    resolution: {integrity: sha512-2QMi89UkQ7bvYs0rB6h1mHSYY63TZYsstwx8L3lMkVLLJxL0d/peZYyb6gbb4+BRRrYEzGMLNsIshsXCw3HnLw==}
+  xash3d-fwgs@1.2.2:
+    resolution: {integrity: sha512-N2w5uSs3OXDGuvgryuKO42LbCQUOveYXDUr9NqmbRnjxpEjVKzhHC+4sTJe6zUTPtiIZSCfd+rHpEa92Da4Vwg==}
 
 snapshots:
 
   hlsdk-portable@0.1.2: {}
 
-  xash3d-fwgs@1.2.1: {}
+  xash3d-fwgs@1.2.2: {}
