@@ -83,21 +83,26 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     needs: [setup, build]
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Download built package
         uses: actions/download-artifact@v4
         with:
           name: built-package
-          path: package
+          path: packages/${{ needs.setup.outputs.package }}
 
-      - name: Configure npm auth
+      - name: Set up Node.js for npm publish
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Publish NPM package (Trusted Publisher)
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Publish NPM package
-        run: cd package && npm publish --access public
+          cd packages/${{ needs.setup.outputs.package }}
+          npm publish --provenance
 
   release:
     runs-on: ubuntu-latest
