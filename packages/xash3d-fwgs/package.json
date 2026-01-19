@@ -1,6 +1,6 @@
 {
   "name": "xash3d-fwgs",
-  "version": "1.2.1+commit.f1fde32",
+  "version": "1.2.2+commit.7c58854",
   "description": "Xash3D-FWGS emscripten port",
   "homepage": "https://github.com/yohimik/webxash3d-fwgs",
   "main": "dist/index.js",
@@ -10,6 +10,10 @@
     "build:ts": "node --loader ts-node/esm scripts/patch-emscripten-js.mts && tsc -p tsconfig.build.json",
     "build": "npm run clean && npm run build:wasm && npm run build:ts",
     "clean": "rm -rf ./dist && rm -rf ./lib/generated/xash.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "files": [
     "dist/**/*"
