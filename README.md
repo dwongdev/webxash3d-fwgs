@@ -42,11 +42,12 @@ Special thanks to the people who made this project possible:
 
 ### Docker Servers
 
-Ready-to-deploy Docker images for Counter-Strike 1.6 web servers:
+Ready-to-deploy Docker images for Counter-Strike 1.6 and Half-Life web servers:
 
 * [cs-web-server](docker/cs-web-server): Vanilla CS 1.6 web server with client and dedicated server
 * [cs-web-server-metpamx](docker/cs-web-server-metpamx): CS 1.6 web server with **Metamod-P & AMX Mod X pre-installed**
 * [hl-web-server](docker/hl-web-server): Vanilla HLDM web server with client and dedicated server
+* [hl-web-server-metpamx](docker/hl-web-server-metpamx): HLDM web server with **Metamod-P & AMX Mod X pre-installed**
 
 All servers support browser-to-server networking and are fully Dockerized for easy deployment.
 
