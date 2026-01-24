@@ -17,6 +17,17 @@ in-browser gameplay and remote multiplayer support.
 
 ---
 
+## 🎯 Looking for AMX Mod X Support?
+
+If you want **AMX Mod X and Metamod pre-installed and ready to use**, check out the [hl-web-server-metpamx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/hl-web-server-metpamx) variant. It includes:
+- Pre-configured Metamod-P
+- AMX Mod X with all base modules
+- Ready for custom plugins out of the box
+
+This base version is compatible with AMX Mod X but requires manual installation.
+
+---
+
 ## 🔧 Technologies
 
 ### 🖥️ Client (src/client)
@@ -45,7 +56,7 @@ To run the game, you must provide original **Half-Life game files** from Steam. 
 
 ```plaintext
 valve.zip
-├── valve/
+└── valve/
 ```
 
 The `valve.zip` file must contain the following two directories from your Steam installation:
@@ -130,3 +141,4 @@ list of updates and release history.
 ## 🔗 Related Projects
 
 - [cs-web-server](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/cs-web-server) - Counter-Strike 1.6 Web Server
+- [hl-web-server-metpamx](https://github.com/yohimik/webxash3d-fwgs/tree/main/docker/hl-web-server-metpamx) - Version with AMX Mod X & Metamod pre-installed

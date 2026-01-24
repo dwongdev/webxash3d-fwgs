@@ -6,6 +6,7 @@ on:
       - 'cs-web-server@*'
       - 'cs-web-server-metpamx@*'
       - 'hl-web-server@*'
+      - 'hl-web-server-metpamx@*'
 
 jobs:
   setup:

@@ -1,18 +1,18 @@
 FROM debian:trixie-slim AS addons
 
 RUN dpkg --add-architecture i386
-RUN apt update && apt upgrade -y && apt -y --no-install-recommends install aptitude
-
-RUN apt install -y --no-install-recommends \
+RUN apt update && apt upgrade -y && \
+    apt install -y --no-install-recommends \
     ca-certificates curl patchelf
 
 ENV PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
 
 WORKDIR /xash
 
-ARG METAMOD_FILENAME="metamod.so"
-ARG METAMOD_URL="https://github.com/mittorn/metamod-p/releases/download/1/metamod.so"
-ARG METAMOD_SHA256="276a7714c1c01bd6669e6835424e64e3b7755153aee24ea0a9144af357c2b634"
+ARG METAMOD_VERSION="1.21p37-xash3d-git2"
+ARG METAMOD_FILENAME="metamod-$METAMOD_VERSION-linux.tar.gz"
+ARG METAMOD_URL_BASE="https://github.com/ludufre/metamod-p/releases/download/v$METAMOD_VERSION"
+ARG METAMOD_SHA256="a9cb141395b61d16996a90137ae4945054460cf3cc5ed272aff4f44e87a75259"
 
 ARG AMXMODX_VERSION="1.9.0-git5302-xash-git2"
 ARG AMXMODX_FILENAME="amxmodx-$AMXMODX_VERSION-base-linux-gcc.tar.gz"
@@ -21,12 +21,11 @@ ARG AMXMODX_SHA256="75109e227a14434574e1d3aa5faab62bf8ead51ae02823208fde46d6e343
 ARG AMXMODX_SHA256_CSTRIKE="9c0005134498249eea7d3627fa161a0c0c47c80a2ecdb7c45be99d152c85c76c"
 ARG AMXMODX_URL_BASE="https://github.com/ludufre/amxmodx/releases/download/v$AMXMODX_VERSION"
 
-RUN mkdir -p /opt/xash/xashds/cstrike/addons/metamod/dlls \
-    && touch /opt/xash/xashds/cstrike/addons/metamod/plugins.ini
+RUN mkdir -p /opt/xash/xashds/cstrike/
 
-RUN curl -sLO "$METAMOD_URL" \
+RUN curl -sLO "$METAMOD_URL_BASE/$METAMOD_FILENAME" \
     && echo "$METAMOD_SHA256  $METAMOD_FILENAME" | sha256sum -c - \
-    && mv "$METAMOD_FILENAME" /opt/xash/xashds/cstrike/addons/metamod/dlls/
+    && tar -C /opt/xash/xashds/cstrike/ -zxvf "$METAMOD_FILENAME"
 
 RUN curl -sLO "$AMXMODX_URL_BASE/$AMXMODX_FILENAME" \
     && echo "$AMXMODX_SHA256  $AMXMODX_FILENAME" | sha256sum -c - \
