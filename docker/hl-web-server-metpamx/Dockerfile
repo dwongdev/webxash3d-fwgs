@@ -1,43 +1,65 @@
-FROM debian:trixie-slim AS addons
+FROM yohimik/cs-web-server-metpamx:latest AS base
 
-RUN dpkg --add-architecture i386
-RUN apt update && apt upgrade -y && \
-    apt install -y --no-install-recommends \
-    ca-certificates curl patchelf
+USER root
 
-ENV PKG_CONFIG_PATH=/usr/lib/i386-linux-gnu/pkgconfig
+RUN cp -r /xashds/cstrike/addons /xashds/valve/
 
-WORKDIR /xash
+WORKDIR /xashds/valve
 
-ARG METAMOD_VERSION="1.21p37-xash3d-git2"
-ARG METAMOD_FILENAME="metamod-$METAMOD_VERSION-linux.tar.gz"
-ARG METAMOD_URL_BASE="https://github.com/ludufre/metamod-p/releases/download/v$METAMOD_VERSION"
-ARG METAMOD_SHA256="a9cb141395b61d16996a90137ae4945054460cf3cc5ed272aff4f44e87a75259"
+# Remove CS-specific configs added at the end (lines after amx_mldebug "")
+RUN sed -i '/^amx_mldebug ""/,${ /^amx_mldebug ""/!d }' \
+    addons/amxmodx/configs/amxx.cfg
 
-ARG AMXMODX_VERSION="1.9.0-git5302-xash-git2"
-ARG AMXMODX_FILENAME="amxmodx-$AMXMODX_VERSION-base-linux-gcc.tar.gz"
-ARG AMXMODX_SHA256="75109e227a14434574e1d3aa5faab62bf8ead51ae02823208fde46d6e3434037"
-ARG AMXMODX_URL_BASE="https://github.com/ludufre/amxmodx/releases/download/v$AMXMODX_VERSION"
+# Revert cmds.ini - remove the two added lines
+RUN sed -i '/" ".*"-".*"".*"u"/d' \
+    addons/amxmodx/configs/cmds.ini && \
+    sed -i '/"Restart Round".*"sv_restartround 1"/d' \
+    addons/amxmodx/configs/cmds.ini
 
-RUN mkdir -p /opt/xash/xashds/valve/
+# Revert core.ini - remove csstats entries
+RUN sed -i '/; It is important that "csstats" comes before "csstats_score"/d' \
+    addons/amxmodx/configs/core.ini && \
+    sed -i '/^csstats[[:space:]]/d' \
+    addons/amxmodx/configs/core.ini && \
+    sed -i '/^csstats_score[[:space:]]/d' \
+    addons/amxmodx/configs/core.ini
 
-RUN curl -sLO "$METAMOD_URL_BASE/$METAMOD_FILENAME" \
-    && echo "$METAMOD_SHA256  $METAMOD_FILENAME" | sha256sum -c - \
-    && tar -C /opt/xash/xashds/valve/ -zxvf "$METAMOD_FILENAME"
+# Revert cvars.ini - remove CS-specific cvars
+RUN sed -i '/"mp_friendlyfire"/d' addons/amxmodx/configs/cvars.ini && \
+    sed -i '/"mp_limitteams"/d' addons/amxmodx/configs/cvars.ini && \
+    sed -i '/"mp_autoteambalance"/d' addons/amxmodx/configs/cvars.ini && \
+    sed -i '/"allow_spectators"/d' addons/amxmodx/configs/cvars.ini && \
+    sed -i '/"mp_freezetime"/d' addons/amxmodx/configs/cvars.ini && \
+    sed -i '/"mp_buytime"/d' addons/amxmodx/configs/cvars.ini && \
+    sed -i '/"mp_startmoney"/d' addons/amxmodx/configs/cvars.ini && \
+    sed -i '/"mp_c4timer"/d' addons/amxmodx/configs/cvars.ini && \
+    sed -i '/"mp_forcechasecam"/d' addons/amxmodx/configs/cvars.ini
 
-RUN curl -sLO "$AMXMODX_URL_BASE/$AMXMODX_FILENAME" \
-    && echo "$AMXMODX_SHA256  $AMXMODX_FILENAME" | sha256sum -c - \
-    && tar -C /opt/xash/xashds/valve/ -zxvf "$AMXMODX_FILENAME" \
-    && echo 'linux addons/amxmodx/dlls/amxmodx_mm_i386.so' >> /opt/xash/xashds/valve/addons/metamod/plugins.ini \
-    && rm -f "$AMXMODX_FILENAME" \
-    && patchelf --clear-execstack /opt/xash/xashds/valve/addons/amxmodx/dlls/amxmodx_mm_i386.so
+# Revert modules.ini - remove commented cstrike and csx
+RUN sed -i '/^;cstrike$/d' addons/amxmodx/configs/modules.ini && \
+    sed -i '/^;csx$/d' addons/amxmodx/configs/modules.ini
+
+# Remove CS-specific plugins and their source files
+RUN rm -f addons/amxmodx/configs/plugins.ini \
+    addons/amxmodx/configs/stats.ini \
+    addons/amxmodx/data/csstats.amxx \
+    addons/amxmodx/modules/cstrike_amxx_i386.so \
+    addons/amxmodx/modules/csx_amxx_i386.so \
+    addons/amxmodx/plugins/miscstats.amxx \
+    addons/amxmodx/plugins/restmenu.amxx \
+    addons/amxmodx/plugins/stats_logging.amxx \
+    addons/amxmodx/plugins/statsx.amxx \
+    addons/amxmodx/scripting/csstats.sma \
+    addons/amxmodx/scripting/miscstats.sma \
+    addons/amxmodx/scripting/restmenu.sma \
+    addons/amxmodx/scripting/stats_logging.sma \
+    addons/amxmodx/scripting/statsx.sma
 
 FROM yohimik/hl-web-server:latest AS server
 
-COPY --from=addons "/opt/xash/xashds/valve" valve
+COPY --from=base "/xashds/valve" valve
+
 USER root
 RUN sed -i 's/dlls\/hl\.so/addons\/metamod\/dlls\/metamod.so/g' valve/liblist.gam
 RUN cat valve/mapcycle.txt >> valve/addons/amxmodx/configs/maps.ini
 USER xashds
-
-WORKDIR /xashds
