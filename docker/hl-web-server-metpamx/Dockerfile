@@ -39,9 +39,11 @@ RUN sed -i '/"mp_friendlyfire"/d' addons/amxmodx/configs/cvars.ini && \
 RUN sed -i '/^;cstrike$/d' addons/amxmodx/configs/modules.ini && \
     sed -i '/^;csx$/d' addons/amxmodx/configs/modules.ini
 
-# Remove CS-specific plugins and their source files
-RUN rm -f addons/amxmodx/configs/plugins.ini \
-    addons/amxmodx/configs/stats.ini \
+# Revert plugins.ini - remove CS-specific plugin entries
+RUN sed -i '/^; Counter-Strike$/,/^$/d' addons/amxmodx/configs/plugins.ini
+
+# Remove CS-specific files
+RUN rm -f addons/amxmodx/configs/stats.ini \
     addons/amxmodx/data/csstats.amxx \
     addons/amxmodx/modules/cstrike_amxx_i386.so \
     addons/amxmodx/modules/csx_amxx_i386.so \
