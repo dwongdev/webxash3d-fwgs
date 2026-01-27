@@ -39,6 +39,12 @@ importers:
         specifier: latest
         version: 1.2.2
 
+  docker/cs-web-server-metpamx:
+    dependencies:
+      cs-web-server:
+        specifier: workspace:0.1.1
+        version: link:../cs-web-server
+
   examples/react-typescript-cs16:
     dependencies:
       '@types/node':

@@ -1,5 +1,5 @@
 {
-  "name": "cs-web-server",
+  "name": "cs-web-server-metpamx",
   "version": "0.1.1",
   "scripts": {
     "dev": "vite",
@@ -9,11 +9,9 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "dependencies": {
+    "cs-web-server": "workspace:0.1.1"
+  },
   "devDependencies": {
-    "esbuild": "0.25.11",
-    "jszip": "3.10.1",
-    "typescript": "^5.9.3",
-    "vite": "7.1.11",
-    "xash3d-fwgs": "latest"
   }
 }
