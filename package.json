@@ -4,7 +4,7 @@
   "version": null,
   "scripts": {
     "rollback-last": "git reset --soft HEAD~1",
-    "commit-publish": "git commit -C ORIG_HEAD",
+    "commit-publish": "git commit -C ORIG_HEAD && for t in $(git tag --points-at ORIG_HEAD); do git tag -f $t HEAD; done",
     "update-commits": "ts-node scripts/update-commits.ts",
     "update-commits-ci": "pnpm run rollback-last && pnpm run update-commits && pnpm run commit-publish"
   },
