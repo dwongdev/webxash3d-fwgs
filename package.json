@@ -1,6 +1,7 @@
 {
   "name": "root",
   "private": true,
+  "version": null,
   "scripts": {
     "update-commits": "ts-node scripts/update-commits.ts"
   },
