@@ -3,7 +3,10 @@
   "private": true,
   "version": null,
   "scripts": {
-    "update-commits": "ts-node scripts/update-commits.ts"
+    "rollback-last": "git reset --soft HEAD~1",
+    "commit-publish": "git commit -C ORIG_HEAD",
+    "update-commits": "ts-node scripts/update-commits.ts",
+    "update-commits-ci": "pnpm run rollback-last && pnpm run update-commits && pnpm run commit-publish"
   },
   "devDependencies": {
     "@types/node": "^24.9.1",
