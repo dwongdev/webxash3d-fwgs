@@ -4,7 +4,7 @@ import filesystemURL from 'xash3d-fwgs/filesystem_stdio.wasm'
 import xashURL from 'xash3d-fwgs/xash.wasm'
 import menuURL from 'xash3d-fwgs/cl_dll/menu_emscripten_wasm32.wasm'
 import clientURL from 'hlsdk-portable/cl_dll/client_emscripten_wasm32.wasm'
-import serverURL from 'hlsdk-portable/dlls/hl_emscripten_wasm32.so'
+import serverURL from 'hlsdk-portable/dlls/hl_emscripten_wasm32.wasm'
 import gles3URL from 'xash3d-fwgs/libref_gles3compat.wasm'
 import './App.css';
 

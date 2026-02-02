@@ -3,7 +3,7 @@ import filesystemURL from 'xash3d-fwgs/filesystem_stdio.wasm'
 import xashURL from 'xash3d-fwgs/xash.wasm'
 import menuURL from 'cs16-client/cl_dll/menu_emscripten_wasm32.wasm'
 import clientURL from 'cs16-client/cl_dll/client_emscripten_wasm32.wasm'
-import serverURL from 'cs16-client/dlls/cs_emscripten_wasm32.so'
+import serverURL from 'cs16-client/dlls/cs_emscripten_wasm32.wasm'
 import extrasURL from 'cs16-client/extras.pk3'
 import gles3URL from 'xash3d-fwgs/libref_gles3compat.wasm'
 import {loadAsync} from 'jszip'
@@ -29,9 +29,9 @@ const App: FC = () => {
                             gles3compat: gles3URL,
                         }
                     },
-                    dynamicLibraries: ['dlls/cs_emscripten_wasm32.so', '/rodir/filesystem_stdio.wasm'],
+                    dynamicLibraries: ['dlls/cs_emscripten_wasm32.wasm', '/rodir/filesystem_stdio.wasm'],
                     filesMap: {
-                        'dlls/cs_emscripten_wasm32.so': serverURL,
+                        'dlls/cs_emscripten_wasm32.wasm': serverURL,
                         '/rodir/filesystem_stdio.wasm': filesystemURL,
                     },
                 });

@@ -44,7 +44,7 @@
                 "filesystem_stdio.wasm",
                 "libref_webgl2.wasm",
                 "cl_dlls/menu_emscripten_wasm32.wasm",
-                "dlls/hl_emscripten_wasm32.so",
+                "dlls/hl_emscripten_wasm32.wasm",
                 "cl_dlls/client_emscripten_wasm32.wasm",
             ],
             onRuntimeInitialized: function () {
@@ -70,10 +70,10 @@
                         return 'https://cdn.jsdelivr.net/npm/xash3d-fwgs@latest/dist/libref_webgl2.wasm'
                     case 'cl_dlls/menu_emscripten_wasm32.wasm':
                         return 'https://cdn.jsdelivr.net/npm/xash3d-fwgs@latest/dist/cl_dll/menu_emscripten_wasm32.wasm'
-                    case 'dlls/hl_emscripten_wasm32.so':
-                        return 'https://cdn.jsdelivr.net/npm/hlsdk-portable@latest/dist/dlls/hl_emscripten_wasm32.so'
+                    case 'dlls/hl_emscripten_wasm32.wasm':
+                        return 'https://cdn.jsdelivr.net/npm/hlsdk-portable@latest/dist/valve/dlls/hl_emscripten_wasm32.wasm'
                     case 'cl_dlls/client_emscripten_wasm32.wasm':
-                        return 'https://cdn.jsdelivr.net/npm/hlsdk-portable@latest/dist/cl_dll/client_emscripten_wasm32.wasm'
+                        return 'https://cdn.jsdelivr.net/npm/hlsdk-portable@latest/dist/valve/cl_dlls/client_emscripten_wasm32.wasm'
                     default:
                         return p
                 }
